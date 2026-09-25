@@ -5,22 +5,22 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'python -m pip install -r requirements.txt'
+                sh 'python3 -m pip install -r requirements.txt'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'python -m pytest'
+                sh 'python3 -m pytest'
             }
         }
 
         stage('Build') {
             steps {
-                bat 'if exist build rmdir /s /q build'
-                bat 'mkdir build'
-                bat 'copy app.py build\\'
-                bat 'copy requirements.txt build\\'
+                sh 'rm -rf build'
+                sh 'mkdir build'
+                sh 'cp app.py build/'
+                sh 'cp requirements.txt build/'
             }
         }
     }
