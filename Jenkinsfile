@@ -5,18 +5,19 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'pip install -r requirements.txt'
+                bat 'python -m pip install -r requirements.txt'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'pytest'
+                bat 'python -m pytest'
             }
         }
 
         stage('Build') {
             steps {
+                bat 'if exist build rmdir /s /q build'
                 bat 'mkdir build'
                 bat 'copy app.py build\\'
                 bat 'copy requirements.txt build\\'
